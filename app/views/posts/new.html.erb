@@ -1,0 +1,34 @@
+<h1>New Post</h1>
+<%= form_tag posts_path do %>
+	<% if @post.errors.any? %>
+        <div id="error_explanation">
+            <h2>There were some errors:</h2>
+            <ul>
+                <% @post.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                <% end %>
+            </ul>
+        </div>
+    <% end %>
+
+    <div class="field<%= " field_with_errors" if @post.errors[:title].any? %>">
+        <label>Title: </label>
+        <%= text_field_tag "title", @post.title %>
+    </div>
+
+    <div class="field<%= " field_with_errors" if @post.errors[:category].any? %>">
+        <%= label_tag "category", "Category" %>
+        <p>Must be either "Fiction" or "Non-Fiction".</p>
+        <%= text_field_tag "category", @post.category %>
+        <p>
+        Please type carefully as our top scientists are working around the clock to
+        enable state-of-the-art dropdown technology for this form field.
+        </p>
+    </div>
+
+    <div class="field<%= " field_with_errors" if @post.errors[:content].any? %>">
+        <label>Content: </label>
+        <%= text_field_tag "content", @post.content %>
+    </div>
+    <%= submit_tag "Submit" %>
+<% end %>
